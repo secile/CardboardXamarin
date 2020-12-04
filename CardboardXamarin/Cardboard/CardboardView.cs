@@ -234,7 +234,10 @@ namespace Com.Google.VRToolkit.CardBoard
 		{
 			if (mRendererHelper != null)
 			{
-				lock (mRendererHelper)
+				// Fix Java.Lang.IllegalMonitorStateException: 'object not locked by thread before wait()'
+				// replace lock and wait() to ReentrantLock and Condition.
+
+				/*lock (mRendererHelper)
 				{
 					mRendererHelper.Shutdown();
 					try
@@ -245,9 +248,23 @@ namespace Com.Google.VRToolkit.CardBoard
 					{
 						Android.Util.Log.Error("CardboardView", "Interrupted during shutdown: " + e.ToString());
 					}
+				}*/
+
+				var shutdownLock = new Java.Util.Concurrent.Locks.ReentrantLock();
+				var shutdownCond = shutdownLock.NewCondition();
+
+				try
+				{
+					shutdownLock.Lock();
+					mRendererHelper.Shutdown(shutdownLock, shutdownCond);
+					shutdownCond.Await();
+				}
+				finally
+				{
+					shutdownLock.Unlock();
 				}
 			}
-			
+
 			base.OnDetachedFromWindow();
 		}
 
@@ -373,7 +390,7 @@ namespace Com.Google.VRToolkit.CardBoard
 				mProjectionChanged = true;
 			}
 
-			public void Shutdown()
+			/*public void Shutdown()
 			{
 				mView.QueueEvent(() =>
 				{
@@ -382,6 +399,24 @@ namespace Com.Google.VRToolkit.CardBoard
 						mShuttingDown = true;
 						mRenderer.OnRendererShutdown();
 						NotifyAll();
+					}
+				});
+			}*/
+
+			public void Shutdown(Java.Util.Concurrent.Locks.ReentrantLock shutdownLock, Java.Util.Concurrent.Locks.ICondition shutdownCond)
+			{
+				mView.QueueEvent(() =>
+				{
+					try
+					{
+						shutdownLock.Lock();
+						mShuttingDown = true;
+						mRenderer.OnRendererShutdown();
+						shutdownCond.Signal();
+					}
+					finally
+					{
+						shutdownLock.Unlock();
 					}
 				});
 			}
