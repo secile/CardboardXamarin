@@ -62,6 +62,25 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cardboard\CardboardActivity.cs" />
+    <Compile Include="Cardboard\CardboardDeviceParams.cs" />
+    <Compile Include="Cardboard\CardboardView.cs" />
+    <Compile Include="Cardboard\Distortion.cs" />
+    <Compile Include="Cardboard\DistortionRenderer.cs" />
+    <Compile Include="Cardboard\EyeParams.cs" />
+    <Compile Include="Cardboard\EyeTransform.cs" />
+    <Compile Include="Cardboard\FieldOfView.cs" />
+    <Compile Include="Cardboard\HeadMountedDisplay.cs" />
+    <Compile Include="Cardboard\HeadTransform.cs" />
+    <Compile Include="Cardboard\ScreenParams.cs" />
+    <Compile Include="Cardboard\Sensors\HeadTracker.cs" />
+    <Compile Include="Cardboard\Sensors\Internal\Matrix3x3d.cs" />
+    <Compile Include="Cardboard\Sensors\Internal\OrientationEKF.cs" />
+    <Compile Include="Cardboard\Sensors\Internal\So3Util.cs" />
+    <Compile Include="Cardboard\Sensors\Internal\Vector3d.cs" />
+    <Compile Include="Cardboard\Sensors\MagnetSensor.cs" />
+    <Compile Include="Cardboard\Sensors\NfcSensor.cs" />
+    <Compile Include="Cardboard\Viewport.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
