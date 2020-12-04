@@ -504,7 +504,7 @@ namespace Com.Google.VRToolkit.CardBoard
 				}
 				else
 				{
-					Java.Lang.JavaSystem.Arraycopy(mHeadTransform.getHeadView(), 0, mMonocular.getTransform().getEyeView(), 0, mHeadTransform.getHeadView().Length);
+					Java.Lang.JavaSystem.Arraycopy(mHeadTransform.getHeadView(), 0, mMonocular.getTransform().GetEyeView(), 0, mHeadTransform.getHeadView().Length);
 				}
 
 				if (mProjectionChanged)
