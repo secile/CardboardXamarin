@@ -46,7 +46,8 @@ namespace Com.Google.VRToolkit.CardBoard
 				throw new IllegalArgumentException("Not enough space to write the result");
 			}
 
-			Java.Lang.JavaSystem.Arraycopy(mHeadView, 0, headView, offset, 16);
+			//Java.Lang.JavaSystem.Arraycopy(mHeadView, 0, headView, offset, 16);
+			System.Array.Copy(mHeadView, 0, headView, offset, 16);
 		}
 
 		public void getTranslation(float[] translation, int offset)
