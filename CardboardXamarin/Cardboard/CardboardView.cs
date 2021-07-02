@@ -81,6 +81,11 @@ namespace Com.Google.VRToolkit.CardBoard
 			return mVRMode;
 		}
 
+		public void SetAlignedToNorth(bool flag)
+		{
+			mHeadTracker.setAlignedToNorth(flag);
+		}
+
 		public HeadMountedDisplay GetHeadMountedDisplay()
 		{
 			return mHmd;

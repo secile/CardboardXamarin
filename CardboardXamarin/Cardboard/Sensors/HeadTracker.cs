@@ -25,7 +25,7 @@ using Com.Google.VRToolkit.CardBoard.Sensors.Internal;
 
 namespace Com.Google.VRToolkit.CardBoard.Sensors
 {
-    class HeadTracker
+	public class HeadTracker
     {
 		private const double NS2S = 1E-09D;
 		private static SensorType[] INPUT_SENSORS = { SensorType.Accelerometer, SensorType.Gyroscope, SensorType.MagneticField };
@@ -40,6 +40,9 @@ namespace Com.Google.VRToolkit.CardBoard.Sensors
 		private bool mTracking;
 		private OrientationEKF mTracker = new OrientationEKF();
 		private long mLastGyroEventTimeNanos;
+
+		private bool mAlignedToNorth;
+		public void setAlignedToNorth(bool flag) { mAlignedToNorth = flag; }
 
 		public HeadTracker(Context context)
 		{
@@ -146,7 +149,10 @@ namespace Com.Google.VRToolkit.CardBoard.Sensors
 				}
 				else if (e.Sensor.Type == SensorType.MagneticField)
 				{
-					mTracker.processMag(mTmpRotatedEvent, e.Timestamp);
+					if (mAlignedToNorth)
+                    {
+						mTracker.processMag(mTmpRotatedEvent, e.Timestamp);
+					}
 				}
 			}
 		}

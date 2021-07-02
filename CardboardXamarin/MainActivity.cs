@@ -23,8 +23,9 @@ namespace CardboardXamarin
             // create CardboardView and set.
             // CardboarViewの作成。
             var glview = new CardboardView(this);
+            glview.SetAlignedToNorth(true); // 実際の北に合わせる場合はtrue
             SetCardboardView(glview);
-
+            
             // create Renderer and set.
             // Rendrerの作成。
             var render = new VrRenderer();
