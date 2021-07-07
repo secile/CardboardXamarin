@@ -25,7 +25,13 @@ namespace CardboardXamarin
             var glview = new CardboardView(this);
             glview.SetAlignedToNorth(true); // 実際の北に合わせる場合はtrue
             SetCardboardView(glview);
-            
+
+            // dont work on my AQUOS sense4 lite without below.
+            // これがないと私のAQUOS sense4 liteで下記ログが表示され動作しない。
+            // Surface size 2064x1008 does not match the expected screen size 2280x1080. Rendering is disabled.
+            var screen = glview.GetScreenParams();
+            glview.Holder.SetFixedSize(screen.getWidth(), screen.getHeight());
+
             // create Renderer and set.
             // Rendrerの作成。
             var render = new VrRenderer();
