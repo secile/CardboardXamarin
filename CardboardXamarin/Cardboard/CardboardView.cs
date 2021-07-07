@@ -296,10 +296,11 @@ namespace Com.Google.VRToolkit.CardBoard
 
 			public void SetVRModeEnabled(bool enabled)
 			{
-				mView.QueueEvent(() =>
-				{
+				// fix issue #1.
+				//mView.QueueEvent(() =>
+				//{
 					mVRMode = enabled;
-				});
+				//});
 			}
 
 			public void OnDrawFrame(HeadTransform head, EyeParams leftEye, EyeParams rightEye)

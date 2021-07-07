@@ -57,6 +57,7 @@ namespace CardboardXamarin
 
         public void OnSurfaceChanged(int width, int height)
         {
+            Android.Util.Log.Debug("OnSurfaceChanged", $"w:{width}, h:{height}");
             GL.Viewport(0, 0, width, height);
         }
 
