@@ -12,3 +12,4 @@ See 'MainActivity.cs' of this repository. This is a sample of using cardboard.
 # Use in your porject.
 (1) Download 'Cardboard' folder and add to your project.  
 (2) Add reference to 'OpenTK'. (Add Reference -> Assembly -> Framework -> OpenTK)  
+(3) Add NFC permission. (Cardboard requires NFC permission)
