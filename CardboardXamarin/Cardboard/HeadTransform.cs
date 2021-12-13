@@ -69,7 +69,7 @@ namespace Com.Google.VRToolkit.CardBoard
 			}
 
 			for (int i = 0; i < 3; i++)
-				forward[(i + offset)] = (-mHeadView[(8 + i)]);
+				forward[i + offset] = -this.mHeadView[2 + (i << 2)]; // fix issue#2.
 		}
 
 		public void getUpVector(float[] up, int offset)
@@ -80,7 +80,7 @@ namespace Com.Google.VRToolkit.CardBoard
 			}
 
 			for (int i = 0; i < 3; i++)
-				up[(i + offset)] = mHeadView[(4 + i)];
+				up[i + offset] = this.mHeadView[1 + (i << 2)]; // fix issue#2.
 		}
 
 		public void getRightVector(float[] right, int offset)
@@ -91,7 +91,7 @@ namespace Com.Google.VRToolkit.CardBoard
 			}
 
 			for (int i = 0; i < 3; i++)
-				right[(i + offset)] = mHeadView[i];
+				right[i + offset] = this.mHeadView[i << 2]; // fix issue#2.
 		}
 
 		public void getQuaternion(float[] quaternion, int offset)
@@ -160,7 +160,7 @@ namespace Com.Google.VRToolkit.CardBoard
 			}
 
 			float yaw, roll, pitch = (float)Math.Asin(mHeadView[6]);
-			if ((float)Math.Sqrt(1.0F - mHeadView[6] * mHeadView[6]) >= 0.01F)
+			if ((float)Math.Sqrt(1.0F - mHeadView[6] * mHeadView[6]) >= GIMBAL_LOCK_EPSILON)
 			{
 				yaw = (float)Math.Atan2(-mHeadView[2], mHeadView[10]);
 				roll = (float)Math.Atan2(-mHeadView[4], mHeadView[5]);
