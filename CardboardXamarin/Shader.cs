@@ -162,6 +162,10 @@ void main(){
             positionHandle = GL.GetAttribLocation(myProgram, "a_Position");
             normalHandle = GL.GetAttribLocation(myProgram, "a_Normal");
             textureHandle = GL.GetAttribLocation(myProgram, "a_Texture");
+
+            // なぜかnormalHandleとtextureHandleが「-1」となる。
+            // シェーダー内で「a_Normal」「a_Texture」を使用してないから？
+            // 対策として、Shape.Draw()でSetNormalとSetTextureをコメントアウト。
         }
 
         #endregion

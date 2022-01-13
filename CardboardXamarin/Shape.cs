@@ -25,8 +25,8 @@ namespace CardboardXamarin
         {
             // 頂点座標をシェーダーに
             if (Vertexs != null) shader.SetVertex(Vertexs);
-            if (Normals != null) shader.SetNormal(Normals);
-            if (Texture != null) shader.SetTexture(Texture);
+            //if (Normals != null) shader.SetNormal(Normals);
+            //if (Texture != null) shader.SetTexture(Texture);
 
             //描画をシェーダに指示
             shader.UpdateMatrix();
