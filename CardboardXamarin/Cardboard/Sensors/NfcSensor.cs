@@ -45,6 +45,7 @@ namespace Com.Google.VRToolkit.CardBoard.Sensors
 		private volatile Ndef mCurrentTag;
 		private Timer mNfcDisconnectTimer;
 		private int mTagConnectionFailures;
+		private bool mNfcPermission;
 
 		public static NfcSensor getInstance(Context context)
 		{
@@ -65,6 +66,13 @@ namespace Com.Google.VRToolkit.CardBoard.Sensors
 
 			if (mNfcAdapter == null)
 			{
+				return;
+			}
+
+			mNfcPermission = mContext.CheckSelfPermission(Android.Manifest.Permission.Nfc) == Android.Content.PM.Permission.Granted;
+			if (!mNfcPermission)
+			{
+				Log.Warn(TAG, "NFC permission required.");
 				return;
 			}
 
@@ -119,7 +127,7 @@ namespace Com.Google.VRToolkit.CardBoard.Sensors
 
 		public bool isNfcEnabled()
 		{
-			return (isNfcSupported()) && (mNfcAdapter.IsEnabled);
+			return (isNfcSupported()) && (mNfcAdapter.IsEnabled) && mNfcPermission;
 		}
 
 		public bool isDeviceInCardboard()
